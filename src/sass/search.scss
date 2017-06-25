@@ -1,0 +1,20 @@
+#search-wrapper {
+	height: 500px;
+	background: url(../images/background2.jpg) no-repeat center center;
+	background-size: 100%;
+	overflow: hidden;
+	
+	#search {
+		width: 800px;
+		margin: 200px auto 0;
+		background: #fff;
+		border-bottom: 4px solid #eee;
+		height: 75px;
+		
+		.current-location {
+			background: #3598dc;
+			height: 75px;
+			width: 75px;
+		}
+	}
+}

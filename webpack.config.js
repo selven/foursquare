@@ -13,11 +13,20 @@ module.exports = {
 				loader: "handlebars-loader"
 			},
 			{
-				test: /\.css$/,
+				test: /\.(png|svg|jpg|gif)$/,
 				use: [
-					'style-loader',
-					'css-loader'
+					'file-loader'
 				]
+			},
+			{
+				test: /\.scss$/,
+				use: [{
+					loader: "style-loader"
+				}, {
+					loader: "css-loader"
+				}, {
+					loader: "sass-loader"
+				}]
 			}
 		]
 	}

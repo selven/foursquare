@@ -1,4 +1,5 @@
-var $ = require('jquery');
+import './sass/search.scss';
+const $ = require('jquery');
 
 export default {
 	events : function() {
