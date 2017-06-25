@@ -384,7 +384,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(10);
+var	fixUrls = __webpack_require__(12);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -715,11 +715,11 @@ var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _helpers = __webpack_require__(17);
+var _helpers = __webpack_require__(19);
 
-var _decorators = __webpack_require__(25);
+var _decorators = __webpack_require__(27);
 
-var _logger = __webpack_require__(27);
+var _logger = __webpack_require__(29);
 
 var _logger2 = _interopRequireDefault(_logger);
 
@@ -814,12 +814,10 @@ exports.logger = _logger2['default'];
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__search__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sass_main_scss__);
 
 
-
-const template = __webpack_require__(14);
 
 __WEBPACK_IMPORTED_MODULE_0__search__["a" /* default */].init();
 
@@ -831,15 +829,51 @@ __WEBPACK_IMPORTED_MODULE_0__search__["a" /* default */].init();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sass_search_scss__);
 
-const $ = __webpack_require__(11);
+const $ = __webpack_require__(13);
+const results_template = __webpack_require__(16);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+	div : $('#search'),
+	results : $('#results'),
+
+	foursquare : {
+		url : 'https://api.foursquare.com/v2/',
+		version : '20131016',
+		client_id : '5OEBPXO5YC1OR2LLADQT3KCU0BRNZPGZ3AYKB2BIOOJ55OKJ',
+		client_secret : 'HRICESWDWAA1V1UBS4UR2EIVFNZFHUENG5CASPLBJSJR4BER'
+	},
+
 	events : function() {
-		
+		var self = this;
+
+		this.div.on('submit', 'form', function(e) {
+			e.preventDefault();
+			self.submit_form($(this).find('input').val());
+		});
+	},
+	
+	show_results : function(results) {
+		console.log(results);
+		var html = results_template(results);
+		console.log(html);
+		$('#results').html(html);
+	},
+	
+	get_data : function(endpoint) {
+		var self = this;
+		$.getJSON(this.foursquare.url + endpoint+'&v='+this.foursquare.version+'&client_id='+this.foursquare.client_id+'&client_secret='+this.foursquare.client_secret, function(response) {
+			self.show_results(response.response.groups[0].items);
+		});
+	},
+	
+	submit_form : function(val) {
+		val = 'London';
+		this.div.addClass('searched');
+		this.get_data('venues/explore?near='+val);
 	},
 	
 	init : function() {
-		console.log('hello');
+		this.events();
 	}
 });
 
@@ -883,7 +917,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(9) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 200px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 60px; }\n    #search-wrapper #search .current-location {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      background: #3598dc url(" + __webpack_require__(32) + ") no-repeat center center;\n      background-size: 50%;\n      float: left; }\n    #search-wrapper #search .search {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      float: right;\n      background: #3598dc url(" + __webpack_require__(33) + ") no-repeat center center;\n      background-size: 40%; }\n    #search-wrapper #search input {\n      width: 500px;\n      height: 60px;\n      float: left;\n      border: 0;\n      font-size: 24px;\n      padding: 0 20px; }\n      #search-wrapper #search input:focus {\n        outline: none; }\n", ""]);
+exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(9) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 300px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 60px; }\n    #search-wrapper #search .current-location {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      background: #3598dc url(" + __webpack_require__(10) + ") no-repeat center center;\n      background-size: 50%;\n      float: left; }\n    #search-wrapper #search .search {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      float: right;\n      background: #3598dc url(" + __webpack_require__(11) + ") no-repeat center center;\n      background-size: 40%; }\n    #search-wrapper #search input {\n      width: 500px;\n      height: 60px;\n      float: left;\n      border: 0;\n      font-size: 24px;\n      padding: 0 20px; }\n      #search-wrapper #search input:focus {\n        outline: none; }\n    #search-wrapper #search.searched {\n      margin-top: 100px;\n      transition-duration: 0.5s; }\n", ""]);
 
 // exports
 
@@ -896,6 +930,18 @@ module.exports = __webpack_require__.p + "25467dd04409853cd8c10b51313a47e0.jpg";
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "3bb233f4138ffdb914edfa4bcf30592a.png";
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "ba0b9bcabce355b232bdfe87b9e6c4f8.png";
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports) {
 
 
@@ -990,7 +1036,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11250,13 +11296,13 @@ return jQuery;
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(13);
+var content = __webpack_require__(15);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -11281,7 +11327,7 @@ if(false) {
 }
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -11295,26 +11341,36 @@ exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  backgro
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(15);
+var Handlebars = __webpack_require__(17);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "Results Page";
+module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "		<div class=\"result\">\n			"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.name : stack1), depth0))
+    + "\n		</div>\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class=\"sidebar\">\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div>";
 },"useData":true});
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
-module.exports = __webpack_require__(16)['default'];
+module.exports = __webpack_require__(18)['default'];
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11336,7 +11392,7 @@ var base = _interopRequireWildcard(_handlebarsBase);
 // Each of these augment the Handlebars object. No need to setup here.
 // (This is done to easily share code between commonjs and browse envs)
 
-var _handlebarsSafeString = __webpack_require__(28);
+var _handlebarsSafeString = __webpack_require__(30);
 
 var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
@@ -11348,11 +11404,11 @@ var _handlebarsUtils = __webpack_require__(0);
 
 var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-var _handlebarsRuntime = __webpack_require__(29);
+var _handlebarsRuntime = __webpack_require__(31);
 
 var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-var _handlebarsNoConflict = __webpack_require__(30);
+var _handlebarsNoConflict = __webpack_require__(32);
 
 var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -11387,7 +11443,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11399,31 +11455,31 @@ exports.registerDefaultHelpers = registerDefaultHelpers;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _helpersBlockHelperMissing = __webpack_require__(18);
+var _helpersBlockHelperMissing = __webpack_require__(20);
 
 var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-var _helpersEach = __webpack_require__(19);
+var _helpersEach = __webpack_require__(21);
 
 var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-var _helpersHelperMissing = __webpack_require__(20);
+var _helpersHelperMissing = __webpack_require__(22);
 
 var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-var _helpersIf = __webpack_require__(21);
+var _helpersIf = __webpack_require__(23);
 
 var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-var _helpersLog = __webpack_require__(22);
+var _helpersLog = __webpack_require__(24);
 
 var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-var _helpersLookup = __webpack_require__(23);
+var _helpersLookup = __webpack_require__(25);
 
 var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-var _helpersWith = __webpack_require__(24);
+var _helpersWith = __webpack_require__(26);
 
 var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -11440,7 +11496,7 @@ function registerDefaultHelpers(instance) {
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11486,7 +11542,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11587,7 +11643,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11619,7 +11675,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11655,7 +11711,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11688,7 +11744,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11707,7 +11763,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11747,7 +11803,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11759,7 +11815,7 @@ exports.registerDefaultDecorators = registerDefaultDecorators;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _decoratorsInline = __webpack_require__(26);
+var _decoratorsInline = __webpack_require__(28);
 
 var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -11770,7 +11826,7 @@ function registerDefaultDecorators(instance) {
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11806,7 +11862,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11860,7 +11916,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11882,7 +11938,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12196,7 +12252,7 @@ function executeDecorators(fn, prog, container, depths, data, blockParams) {
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12221,10 +12277,10 @@ exports['default'] = function (Handlebars) {
 module.exports = exports['default'];
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2xpYi9oYW5kbGViYXJzL25vLWNvbmZsaWN0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O3FCQUNlLFVBQVMsVUFBVSxFQUFFOztBQUVsQyxNQUFJLElBQUksR0FBRyxPQUFPLE1BQU0sS0FBSyxXQUFXLEdBQUcsTUFBTSxHQUFHLE1BQU07TUFDdEQsV0FBVyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7O0FBRWxDLFlBQVUsQ0FBQyxVQUFVLEdBQUcsWUFBVztBQUNqQyxRQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssVUFBVSxFQUFFO0FBQ2xDLFVBQUksQ0FBQyxVQUFVLEdBQUcsV0FBVyxDQUFDO0tBQy9CO0FBQ0QsV0FBTyxVQUFVLENBQUM7R0FDbkIsQ0FBQztDQUNIIiwiZmlsZSI6Im5vLWNvbmZsaWN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyogZ2xvYmFsIHdpbmRvdyAqL1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oSGFuZGxlYmFycykge1xuICAvKiBpc3RhbmJ1bCBpZ25vcmUgbmV4dCAqL1xuICBsZXQgcm9vdCA9IHR5cGVvZiBnbG9iYWwgIT09ICd1bmRlZmluZWQnID8gZ2xvYmFsIDogd2luZG93LFxuICAgICAgJEhhbmRsZWJhcnMgPSByb290LkhhbmRsZWJhcnM7XG4gIC8qIGlzdGFuYnVsIGlnbm9yZSBuZXh0ICovXG4gIEhhbmRsZWJhcnMubm9Db25mbGljdCA9IGZ1bmN0aW9uKCkge1xuICAgIGlmIChyb290LkhhbmRsZWJhcnMgPT09IEhhbmRsZWJhcnMpIHtcbiAgICAgIHJvb3QuSGFuZGxlYmFycyA9ICRIYW5kbGViYXJzO1xuICAgIH1cbiAgICByZXR1cm4gSGFuZGxlYmFycztcbiAgfTtcbn1cbiJdfQ==
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports) {
 
 var g;
@@ -12249,18 +12305,6 @@ try {
 
 module.exports = g;
 
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "3bb233f4138ffdb914edfa4bcf30592a.png";
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "ba0b9bcabce355b232bdfe87b9e6c4f8.png";
 
 /***/ })
 /******/ ]);

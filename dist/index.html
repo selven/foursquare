@@ -10,12 +10,14 @@
 		</div>
 		<div id="search-wrapper">
 			<div id="search">
-				<a href="#" class="search">Search</a>
-				<a href="#" class="current-location">Current Location</a>
-				<input type="text" placeholder="Search Place or Postcode" />
+				<form>
+					<input class="search" type="submit" />
+					<a href="#" class="current-location">Current Location</a>
+					<input type="text" placeholder="Search Place or Postcode" />
+				</form>
 			</div>
 		</div>
-		<div id="results"></div>
+		<div id="results"><div id="loading"></div></div>
 		<script src="bundle.js"></script>
 	</body>
 </html>
