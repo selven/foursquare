@@ -384,7 +384,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(9);
+var	fixUrls = __webpack_require__(10);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -814,7 +814,7 @@ exports.logger = _logger2['default'];
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__search__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sass_main_scss__);
 
 
@@ -831,7 +831,7 @@ __WEBPACK_IMPORTED_MODULE_0__search__["a" /* default */].init();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sass_search_scss__);
 
-const $ = __webpack_require__(10);
+const $ = __webpack_require__(11);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	events : function() {
@@ -883,13 +883,19 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(32) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 200px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 75px; }\n    #search-wrapper #search .current-location {\n      background: #3598dc;\n      height: 75px;\n      width: 75px; }\n", ""]);
+exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(9) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 200px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 60px; }\n    #search-wrapper #search .current-location {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      background: #3598dc url(" + __webpack_require__(32) + ") no-repeat center center;\n      background-size: 50%;\n      float: left; }\n    #search-wrapper #search .search {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      float: right;\n      background: #3598dc url(" + __webpack_require__(33) + ") no-repeat center center;\n      background-size: 40%; }\n    #search-wrapper #search input {\n      width: 500px;\n      height: 60px;\n      float: left;\n      border: 0;\n      font-size: 24px;\n      padding: 0 20px; }\n      #search-wrapper #search input:focus {\n        outline: none; }\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "25467dd04409853cd8c10b51313a47e0.jpg";
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports) {
 
 
@@ -984,7 +990,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11244,13 +11250,13 @@ return jQuery;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(13);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -11275,7 +11281,7 @@ if(false) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -11283,13 +11289,12 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background: #eee; }\n\n#header-wrapper header {\n  width: 800px;\n  margin: 0 auto; }\n", ""]);
+exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  background: #eee; }\n\n#header-wrapper header {\n  width: 800px;\n  margin: 0 auto; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 13 */,
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12249,7 +12254,13 @@ module.exports = g;
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "25467dd04409853cd8c10b51313a47e0.jpg";
+module.exports = __webpack_require__.p + "3bb233f4138ffdb914edfa4bcf30592a.png";
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "ba0b9bcabce355b232bdfe87b9e6c4f8.png";
 
 /***/ })
 /******/ ]);
