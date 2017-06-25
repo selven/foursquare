@@ -2,6 +2,7 @@ import './sass/search.scss';
 import './sass/results.scss';
 const $ = require('jquery');
 const results_template = require('./templates/results.handlebars');
+const error_template = require('./templates/error.handlebars');
 
 export default {
 	div : $('#search'),
@@ -19,7 +20,8 @@ export default {
 
 		this.div.on('submit', 'form', function(e) {
 			e.preventDefault();
-			self.submit_form($(this).find('input').val());
+			self.submit_form($(this).find('input.search').val());
+			console.log($(this).find('input.search').val());
 		});
 		
 		this.results.on('click', '.result', function() {
@@ -38,6 +40,12 @@ export default {
 		this.results.find('.result').eq(0).click();
 	},
 	
+	show_error : function(error) {
+		console.log(error);
+		var html = error_template(error);
+		this.results.html(html);
+	},
+	
 	get_data : function(endpoint) {
 		var self = this;
 		$.getJSON(this.foursquare.url +
@@ -45,13 +53,14 @@ export default {
 			'&v='+this.foursquare.version+
 			'&client_id='+this.foursquare.client_id+
 			'&client_secret='+this.foursquare.client_secret
-		, function(response) {
+		).done(function(response) {
 			self.show_results(response.response.groups[0].items);
+		}).fail(function(response) {
+			self.show_error(response.meta);
 		});
 	},
 	
 	submit_form : function(val) {
-		val = 'London';
 		this.div.addClass('searched');
 		this.get_data('venues/explore?near='+val);
 	},

@@ -834,6 +834,7 @@ __WEBPACK_IMPORTED_MODULE_0__search__["a" /* default */].init();
 
 const $ = __webpack_require__(15);
 const results_template = __webpack_require__(16);
+const error_template = __webpack_require__(36);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	div : $('#search'),
@@ -851,7 +852,8 @@ const results_template = __webpack_require__(16);
 
 		this.div.on('submit', 'form', function(e) {
 			e.preventDefault();
-			self.submit_form($(this).find('input').val());
+			self.submit_form($(this).find('input.search').val());
+			console.log($(this).find('input.search').val());
 		});
 		
 		this.results.on('click', '.result', function() {
@@ -870,6 +872,12 @@ const results_template = __webpack_require__(16);
 		this.results.find('.result').eq(0).click();
 	},
 	
+	show_error : function(error) {
+		console.log(error);
+		var html = error_template(error);
+		this.results.html(html);
+	},
+	
 	get_data : function(endpoint) {
 		var self = this;
 		$.getJSON(this.foursquare.url +
@@ -877,13 +885,14 @@ const results_template = __webpack_require__(16);
 			'&v='+this.foursquare.version+
 			'&client_id='+this.foursquare.client_id+
 			'&client_secret='+this.foursquare.client_secret
-		, function(response) {
+		).done(function(response) {
 			self.show_results(response.response.groups[0].items);
+		}).fail(function(response) {
+			self.show_error(response.meta);
 		});
 	},
 	
 	submit_form : function(val) {
-		val = 'London';
 		this.div.addClass('searched');
 		this.get_data('venues/explore?near='+val);
 	},
@@ -933,7 +942,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(9) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 300px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 60px; }\n    #search-wrapper #search .current-location {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      background: #3598dc url(" + __webpack_require__(10) + ") no-repeat center center;\n      background-size: 50%;\n      float: left; }\n    #search-wrapper #search .search {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      float: right;\n      background: #3598dc url(" + __webpack_require__(11) + ") no-repeat center center;\n      background-size: 40%; }\n    #search-wrapper #search input {\n      width: 500px;\n      height: 60px;\n      float: left;\n      border: 0;\n      font-size: 24px;\n      padding: 0 20px; }\n      #search-wrapper #search input:focus {\n        outline: none; }\n    #search-wrapper #search.searched {\n      margin-top: 100px;\n      transition-duration: 0.5s; }\n", ""]);
+exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(9) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 300px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 60px; }\n    #search-wrapper #search .current-location {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      background: #3598dc url(" + __webpack_require__(10) + ") no-repeat center center;\n      background-size: 50%;\n      float: left; }\n    #search-wrapper #search .submit {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      float: right;\n      background: #3598dc url(" + __webpack_require__(11) + ") no-repeat center center;\n      background-size: 40%; }\n    #search-wrapper #search input {\n      width: 500px;\n      height: 60px;\n      float: left;\n      border: 0;\n      font-size: 24px;\n      padding: 0 20px; }\n      #search-wrapper #search input:focus {\n        outline: none; }\n    #search-wrapper #search.searched {\n      margin-top: 100px;\n      transition-duration: 0.5s; }\n", ""]);
 
 // exports
 
@@ -1091,7 +1100,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#results-wrapper #results {\n  width: 800px;\n  margin: -310px auto 0; }\n  #results-wrapper #results .result {\n    background: #fff;\n    margin-bottom: 4px;\n    font-family: verdana;\n    font-size: 11px;\n    padding: 10px;\n    cursor: pointer; }\n    #results-wrapper #results .result h3 {\n      font-size: 12px; }\n  #results-wrapper #results .sidebar {\n    width: 200px;\n    float: left; }\n    #results-wrapper #results .sidebar li {\n      list-style: none; }\n  #results-wrapper #results #map {\n    float: right;\n    width: 590px; }\n", ""]);
+exports.push([module.i, "#results-wrapper #results {\n  width: 800px;\n  margin: -310px auto 0; }\n  #results-wrapper #results .result {\n    background: #fff;\n    margin-bottom: 4px;\n    font-family: verdana;\n    font-size: 11px;\n    padding: 10px;\n    cursor: pointer; }\n    #results-wrapper #results .result h3 {\n      font-size: 12px; }\n  #results-wrapper #results .sidebar {\n    width: 200px;\n    float: left; }\n    #results-wrapper #results .sidebar li {\n      list-style: none; }\n  #results-wrapper #results #map {\n    float: right;\n    width: 590px; }\n  #results-wrapper #results .error {\n    background: #fff;\n    padding: 20px; }\n", ""]);
 
 // exports
 
@@ -12372,6 +12381,16 @@ exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  backgro
 
 // exports
 
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(17);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"error\">\n	No results found, please try another search term.\n</div>";
+},"useData":true});
 
 /***/ })
 /******/ ]);
