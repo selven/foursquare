@@ -8,8 +8,16 @@ body {
 }
 
 #header-wrapper {
+	background: #fff;
+	border-bottom: 4px solid #eee;
+
 	header {
 		width: 800px;
 		margin: 0 auto;
+		
+		img {
+			width: 70px;
+			height: 70px;
+		}
 	}
 }

@@ -1,4 +1,5 @@
 import './sass/search.scss';
+import './sass/results.scss';
 const $ = require('jquery');
 const results_template = require('./templates/results.handlebars');
 

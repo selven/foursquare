@@ -1,0 +1,27 @@
+#results-wrapper {
+	#results {
+		width: 800px;
+		margin: -310px auto 0;
+		
+		.result {
+			background: #fff;
+			margin-bottom: 4px;
+			font-family: verdana;
+			font-size: 11px;
+			padding: 10px;
+			
+			h3 {
+				font-size: 12px;
+			}
+		}
+		
+		.sidebar {
+			width: 200px;
+			float: left;
+			
+			li {
+				list-style: none;
+			}
+		}
+	}
+}

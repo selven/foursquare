@@ -1,7 +1,10 @@
 <div class="sidebar">
 	{{#each this}}
-		<div class="result">
-			{{this.venue.name}}
+		<div class="result" data-lat="{{this.venue.location.lat}}" data-long="{{this.venue.location.long}}">
+			<h3>{{this.venue.name}}</h3>
+			<ul>
+				<li>Here Now: {{this.venue.hereNow.count}}</li>
+			</ul>
 		</div>
 	{{/each}}
 </div>
