@@ -715,11 +715,11 @@ var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _helpers = __webpack_require__(17);
+var _helpers = __webpack_require__(19);
 
-var _decorators = __webpack_require__(25);
+var _decorators = __webpack_require__(27);
 
-var _logger = __webpack_require__(27);
+var _logger = __webpack_require__(29);
 
 var _logger2 = _interopRequireDefault(_logger);
 
@@ -814,7 +814,7 @@ exports.logger = _logger2['default'];
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__search__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sass_main_scss__);
 
 
@@ -828,12 +828,12 @@ __WEBPACK_IMPORTED_MODULE_0__search__["a" /* default */].init();
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sass_search_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_results_scss__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_results_scss__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_results_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sass_results_scss__);
 
 
-const $ = __webpack_require__(13);
-const results_template = __webpack_require__(14);
+const $ = __webpack_require__(15);
+const results_template = __webpack_require__(16);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	div : $('#search'),
@@ -853,18 +853,31 @@ const results_template = __webpack_require__(14);
 			e.preventDefault();
 			self.submit_form($(this).find('input').val());
 		});
+		
+		this.results.on('click', '.result', function() {
+			self.show_map($(this).data('lat'), $(this).data('lng'));
+		});
+	},
+	
+	show_map : function(lat, lng) {
+		var map = '<iframe width="590" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCicr-xLY4eRssgOFeiNBDzjXGY9GkwUc0&zoom=13&q=loc:'+lat+','+lng+'" allowfullscreen></iframe>';
+		$('#map').html(map);
 	},
 	
 	show_results : function(results) {
-		console.log(results);
 		var html = results_template(results);
-		console.log(html);
-		$('#results').html(html);
+		this.results.html(html);
+		this.results.find('.result').eq(0).click();
 	},
 	
 	get_data : function(endpoint) {
 		var self = this;
-		$.getJSON(this.foursquare.url + endpoint+'&v='+this.foursquare.version+'&client_id='+this.foursquare.client_id+'&client_secret='+this.foursquare.client_secret, function(response) {
+		$.getJSON(this.foursquare.url +
+			endpoint+
+			'&v='+this.foursquare.version+
+			'&client_id='+this.foursquare.client_id+
+			'&client_secret='+this.foursquare.client_secret
+		, function(response) {
 			self.show_results(response.response.groups[0].items);
 		});
 	},
@@ -1040,6 +1053,51 @@ module.exports = function (css) {
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(14);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(3)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./results.scss", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./results.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "#results-wrapper #results {\n  width: 800px;\n  margin: -310px auto 0; }\n  #results-wrapper #results .result {\n    background: #fff;\n    margin-bottom: 4px;\n    font-family: verdana;\n    font-size: 11px;\n    padding: 10px;\n    cursor: pointer; }\n    #results-wrapper #results .result h3 {\n      font-size: 12px; }\n  #results-wrapper #results .sidebar {\n    width: 200px;\n    float: left; }\n    #results-wrapper #results .sidebar li {\n      list-style: none; }\n  #results-wrapper #results #map {\n    float: right;\n    width: 590px; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11299,18 +11357,18 @@ return jQuery;
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(15);
+var Handlebars = __webpack_require__(17);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "		<div class=\"result\" data-lat=\""
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.location : stack1)) != null ? stack1.lat : stack1), depth0))
-    + "\" data-long=\""
-    + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.location : stack1)) != null ? stack1["long"] : stack1), depth0))
+    + "\" data-lng=\""
+    + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.location : stack1)) != null ? stack1.lng : stack1), depth0))
     + "\">\n			<h3>"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.name : stack1), depth0))
     + "</h3>\n			<ul>\n				<li>Here Now: "
@@ -11321,20 +11379,20 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
 
   return "<div class=\"sidebar\">\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "</div>";
+    + "</div>\n<div id=\"map\"></div>";
 },"useData":true});
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
-module.exports = __webpack_require__(16)['default'];
+module.exports = __webpack_require__(18)['default'];
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11356,7 +11414,7 @@ var base = _interopRequireWildcard(_handlebarsBase);
 // Each of these augment the Handlebars object. No need to setup here.
 // (This is done to easily share code between commonjs and browse envs)
 
-var _handlebarsSafeString = __webpack_require__(28);
+var _handlebarsSafeString = __webpack_require__(30);
 
 var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
@@ -11368,11 +11426,11 @@ var _handlebarsUtils = __webpack_require__(0);
 
 var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-var _handlebarsRuntime = __webpack_require__(29);
+var _handlebarsRuntime = __webpack_require__(31);
 
 var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-var _handlebarsNoConflict = __webpack_require__(30);
+var _handlebarsNoConflict = __webpack_require__(32);
 
 var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -11407,7 +11465,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11419,31 +11477,31 @@ exports.registerDefaultHelpers = registerDefaultHelpers;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _helpersBlockHelperMissing = __webpack_require__(18);
+var _helpersBlockHelperMissing = __webpack_require__(20);
 
 var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-var _helpersEach = __webpack_require__(19);
+var _helpersEach = __webpack_require__(21);
 
 var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-var _helpersHelperMissing = __webpack_require__(20);
+var _helpersHelperMissing = __webpack_require__(22);
 
 var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-var _helpersIf = __webpack_require__(21);
+var _helpersIf = __webpack_require__(23);
 
 var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-var _helpersLog = __webpack_require__(22);
+var _helpersLog = __webpack_require__(24);
 
 var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-var _helpersLookup = __webpack_require__(23);
+var _helpersLookup = __webpack_require__(25);
 
 var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-var _helpersWith = __webpack_require__(24);
+var _helpersWith = __webpack_require__(26);
 
 var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -11460,7 +11518,7 @@ function registerDefaultHelpers(instance) {
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11506,7 +11564,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11607,7 +11665,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11639,7 +11697,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11675,7 +11733,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11708,7 +11766,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11727,7 +11785,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11767,7 +11825,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11779,7 +11837,7 @@ exports.registerDefaultDecorators = registerDefaultDecorators;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _decoratorsInline = __webpack_require__(26);
+var _decoratorsInline = __webpack_require__(28);
 
 var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -11790,7 +11848,7 @@ function registerDefaultDecorators(instance) {
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11826,7 +11884,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11880,7 +11938,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11902,7 +11960,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12216,7 +12274,7 @@ function executeDecorators(fn, prog, container, depths, data, blockParams) {
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12241,10 +12299,10 @@ exports['default'] = function (Handlebars) {
 module.exports = exports['default'];
 //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2xpYi9oYW5kbGViYXJzL25vLWNvbmZsaWN0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O3FCQUNlLFVBQVMsVUFBVSxFQUFFOztBQUVsQyxNQUFJLElBQUksR0FBRyxPQUFPLE1BQU0sS0FBSyxXQUFXLEdBQUcsTUFBTSxHQUFHLE1BQU07TUFDdEQsV0FBVyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7O0FBRWxDLFlBQVUsQ0FBQyxVQUFVLEdBQUcsWUFBVztBQUNqQyxRQUFJLElBQUksQ0FBQyxVQUFVLEtBQUssVUFBVSxFQUFFO0FBQ2xDLFVBQUksQ0FBQyxVQUFVLEdBQUcsV0FBVyxDQUFDO0tBQy9CO0FBQ0QsV0FBTyxVQUFVLENBQUM7R0FDbkIsQ0FBQztDQUNIIiwiZmlsZSI6Im5vLWNvbmZsaWN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyogZ2xvYmFsIHdpbmRvdyAqL1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oSGFuZGxlYmFycykge1xuICAvKiBpc3RhbmJ1bCBpZ25vcmUgbmV4dCAqL1xuICBsZXQgcm9vdCA9IHR5cGVvZiBnbG9iYWwgIT09ICd1bmRlZmluZWQnID8gZ2xvYmFsIDogd2luZG93LFxuICAgICAgJEhhbmRsZWJhcnMgPSByb290LkhhbmRsZWJhcnM7XG4gIC8qIGlzdGFuYnVsIGlnbm9yZSBuZXh0ICovXG4gIEhhbmRsZWJhcnMubm9Db25mbGljdCA9IGZ1bmN0aW9uKCkge1xuICAgIGlmIChyb290LkhhbmRsZWJhcnMgPT09IEhhbmRsZWJhcnMpIHtcbiAgICAgIHJvb3QuSGFuZGxlYmFycyA9ICRIYW5kbGViYXJzO1xuICAgIH1cbiAgICByZXR1cm4gSGFuZGxlYmFycztcbiAgfTtcbn1cbiJdfQ==
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports) {
 
 var g;
@@ -12271,13 +12329,13 @@ module.exports = g;
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(33);
+var content = __webpack_require__(35);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -12302,51 +12360,6 @@ if(false) {
 }
 
 /***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  background: #eee; }\n\n#header-wrapper {\n  background: #fff;\n  border-bottom: 4px solid #eee; }\n  #header-wrapper header {\n    width: 800px;\n    margin: 0 auto; }\n    #header-wrapper header img {\n      width: 70px;\n      height: 70px; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(35);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(3)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./results.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/lib/loader.js!./results.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12355,7 +12368,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#results-wrapper #results {\n  width: 800px;\n  margin: -310px auto 0; }\n  #results-wrapper #results .result {\n    background: #fff;\n    margin-bottom: 4px;\n    font-family: verdana;\n    font-size: 11px;\n    padding: 10px; }\n    #results-wrapper #results .result h3 {\n      font-size: 12px; }\n  #results-wrapper #results .sidebar {\n    width: 200px;\n    float: left; }\n    #results-wrapper #results .sidebar li {\n      list-style: none; }\n", ""]);
+exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  background: #eee; }\n\n#header-wrapper {\n  background: #fff;\n  border-bottom: 4px solid #eee; }\n  #header-wrapper header {\n    width: 800px;\n    margin: 0 auto; }\n    #header-wrapper header img {\n      width: 70px;\n      height: 70px; }\n", ""]);
 
 // exports
 
