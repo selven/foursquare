@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -384,7 +384,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(12);
+var	fixUrls = __webpack_require__(13);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -700,6 +700,15 @@ function updateLink (link, options, obj) {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// Create a simple path alias to allow browserify to resolve
+// the runtime on a supported path.
+module.exports = __webpack_require__(18)['default'];
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -808,13 +817,13 @@ exports.logger = _logger2['default'];
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__search__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__search__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sass_main_scss__);
 
 
@@ -822,19 +831,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0__search__["a" /* default */].init();
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sass_search_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__sass_search_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_results_scss__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_results_scss__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sass_results_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__sass_results_scss__);
 
 
-const $ = __webpack_require__(15);
-const results_template = __webpack_require__(16);
-const error_template = __webpack_require__(36);
+const $ = __webpack_require__(16);
+const results_template = __webpack_require__(17);
+const error_template = __webpack_require__(34);
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	div : $('#search'),
@@ -903,13 +912,13 @@ const error_template = __webpack_require__(36);
 });
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8);
+var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -934,7 +943,7 @@ if(false) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -942,31 +951,31 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(9) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 300px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 60px; }\n    #search-wrapper #search .current-location {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      background: #3598dc url(" + __webpack_require__(10) + ") no-repeat center center;\n      background-size: 50%;\n      float: left; }\n    #search-wrapper #search .submit {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      float: right;\n      background: #3598dc url(" + __webpack_require__(11) + ") no-repeat center center;\n      background-size: 40%; }\n    #search-wrapper #search input {\n      width: 500px;\n      height: 60px;\n      float: left;\n      border: 0;\n      font-size: 24px;\n      padding: 0 20px; }\n      #search-wrapper #search input:focus {\n        outline: none; }\n    #search-wrapper #search.searched {\n      margin-top: 100px;\n      transition-duration: 0.5s; }\n", ""]);
+exports.push([module.i, "#search-wrapper {\n  height: 500px;\n  background: url(" + __webpack_require__(10) + ") no-repeat center center;\n  background-size: 100%;\n  overflow: hidden; }\n  #search-wrapper #search {\n    width: 800px;\n    margin: 300px auto 0;\n    background: #fff;\n    border-bottom: 4px solid #eee;\n    height: 60px; }\n    #search-wrapper #search .current-location {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      background: #3598dc url(" + __webpack_require__(11) + ") no-repeat center center;\n      background-size: 50%;\n      float: left; }\n    #search-wrapper #search .submit {\n      height: 60px;\n      width: 60px;\n      display: block;\n      text-indent: -900em;\n      float: right;\n      background: #3598dc url(" + __webpack_require__(12) + ") no-repeat center center;\n      background-size: 40%; }\n    #search-wrapper #search input {\n      width: 740px;\n      height: 60px;\n      float: left;\n      border: 0;\n      font-size: 24px;\n      padding: 0 20px; }\n      #search-wrapper #search input:focus {\n        outline: none; }\n    #search-wrapper #search.searched {\n      margin-top: 100px;\n      transition-duration: 0.5s; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "25467dd04409853cd8c10b51313a47e0.jpg";
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "3bb233f4138ffdb914edfa4bcf30592a.png";
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "ba0b9bcabce355b232bdfe87b9e6c4f8.png";
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 
@@ -1061,13 +1070,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(14);
+var content = __webpack_require__(15);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1092,7 +1101,7 @@ if(false) {
 }
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -1106,7 +1115,7 @@ exports.push([module.i, "#results-wrapper #results {\n  width: 800px;\n  margin:
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11366,10 +11375,10 @@ return jQuery;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(17);
+var Handlebars = __webpack_require__(4);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
@@ -11382,6 +11391,10 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.name : stack1), depth0))
     + "</h3>\n			<ul>\n				<li>Here Now: "
     + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.hereNow : stack1)) != null ? stack1.count : stack1), depth0))
+    + "</li>\n				<li>Opening: "
+    + alias2(alias1(((stack1 = ((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.hours : stack1)) != null ? stack1.status : stack1), depth0))
+    + "</li>\n				<li>Type: "
+    + alias2(alias1(((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.venue : depth0)) != null ? stack1.categories : stack1)) != null ? stack1["0"] : stack1)) != null ? stack1.name : stack1), depth0))
     + "</li>\n			</ul>\n		</div>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -11390,15 +11403,6 @@ module.exports = (Handlebars["default"] || Handlebars).template({"1":function(co
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n<div id=\"map\"></div>";
 },"useData":true});
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Create a simple path alias to allow browserify to resolve
-// the runtime on a supported path.
-module.exports = __webpack_require__(18)['default'];
-
 
 /***/ }),
 /* 18 */
@@ -11416,7 +11420,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-var _handlebarsBase = __webpack_require__(4);
+var _handlebarsBase = __webpack_require__(5);
 
 var base = _interopRequireWildcard(_handlebarsBase);
 
@@ -11998,7 +12002,7 @@ var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _base = __webpack_require__(4);
+var _base = __webpack_require__(5);
 
 function checkRevision(compilerInfo) {
   var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -12341,10 +12345,20 @@ module.exports = g;
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var Handlebars = __webpack_require__(4);
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"error\">\n	No results found, please try another search term.\n</div>";
+},"useData":true});
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(35);
+var content = __webpack_require__(36);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -12369,7 +12383,7 @@ if(false) {
 }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -12381,16 +12395,6 @@ exports.push([module.i, "* {\n  margin: 0;\n  padding: 0; }\n\nbody {\n  backgro
 
 // exports
 
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(17);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"error\">\n	No results found, please try another search term.\n</div>";
-},"useData":true});
 
 /***/ })
 /******/ ]);
